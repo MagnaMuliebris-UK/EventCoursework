@@ -4,8 +4,8 @@ class item{
     itemName = "";
     itemDesc = "";
     itemImage = "";
-    constructor(item_ID, item_Name, item_Desc, item_Image = false){
-        this.itemID = item_ID;
+    constructor(item_Name, item_Desc, item_Image = false){
+        this.itemID = IDmaker();
         this.itemName = item_Name;
         this.itemDesc = item_Desc;
         this.itemImage = item_Image;
@@ -13,9 +13,15 @@ class item{
 }
 let items = new Array();
 
+//note: ...Place is a placeholder for where the items are being stored. 
+//May be local storage, may be a database, may be something else entirely.
+//Considering JSON files. Will consider during meeting.
+//DOUBLY NOTE: Should probably be stored completely separate from posts.
 function getItemsFromPlace(items_)
 {
     items = items_;
+    //In reality, items_ isn't passed, and instead, 
+    //the items are pulled from wherever they are being stored.
 }
 
 function IDmaker(){

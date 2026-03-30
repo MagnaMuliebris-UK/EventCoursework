@@ -1,10 +1,18 @@
+//Are we even able to hide the password? Can be seen on inspect element.
+//We could encrypt the password? Discuss during meeting.
 class Account
 {
     accName = "";
+    //CAN WE STORE ELSEWHERE?
     passWord = "";
-    constructor(accName_)
+    email = "";
+    constructor(accName_, passWord_, email_)
     {
         this.accName = accName_;
+        //No clue if we're doing this.
+        passWord_ = ENCRYPTME(passWord_);
+        this.passWord = passWord_;//Will need decrypted when logging in and saving.
+        this.email = email_;
     }
 }
 let accounts = new Array();
@@ -24,11 +32,12 @@ function accNameUnique(userName)
 }
 
 function goodEnoughPass(passWord)
-{  
-    //Needs looked At Later
-    if((typeof passWord == String)&&(passWord))
-    {}
-    return ;
+{
+    if((typeof passWord == String)&&(passWord.length >= 8)&&(passWord.match(/[A-Z]/))&&(passWord.match(/[a-z]/))&&(passWord.match(/[0-9]/)))
+    {
+        return true;
+    }
+    return false;
 }
 
 function acctCreate(uName, pass){
