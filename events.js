@@ -18,3 +18,61 @@ function validateFormData(){
         //No need for an else, html custom validation message.
     });
 };
+
+validateFormData();
+
+var activeCategory = 'All';
+var searchQuery = '';
+
+// FILTER LOGIC
+function getFilteredEvents() {
+  var results = [];
+
+  for (var i = 0; i < EVENTS.length; i++) {
+    var ev = EVENTS[i];
+
+    var categoryMatch =
+      (activeCategory === 'All') ||
+      (ev.category === activeCategory);
+
+    var query = searchQuery.toLowerCase();
+
+    var searchMatch =
+      (query === '') ||
+      ev.title.toLowerCase().indexOf(query) !== -1 ||
+      ev.location.toLowerCase().indexOf(query) !== -1 ||
+      ev.category.toLowerCase().indexOf(query) !== -1;
+
+    if (categoryMatch && searchMatch) {
+      results.push(ev);
+    }
+  }
+
+  return results;
+}
+
+// SEARCH INPUT
+document.getElementById('searchInput').addEventListener('input', function () {
+  searchQuery = this.value.trim();
+  renderEvents(); // calls Person 2's function
+});
+
+// CATEGORY BUTTONS
+var btns = document.querySelectorAll('.filter-btn');
+
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('click', function () {
+
+    // remove active from all
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].classList.remove('active');
+    }
+
+    // add active to clicked
+    this.classList.add('active');
+
+    activeCategory = this.dataset.cat;
+
+    renderEvents(); // re-render events
+  });
+}
