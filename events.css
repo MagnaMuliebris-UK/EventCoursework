@@ -1,55 +1,46 @@
-/*Change if needsbe for the req part*/
+/* Required field asterisk */
 .required::after {
-        content: ' *';
-        color: red;
+  content: ' *';
+  color: red;
 }
 
+/* Search bar container */
 .search-wrap {
   position: relative;
   margin-bottom: 20px;
 }
 
+/* Search icon */
 .search-icon {
   position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: var(--muted);
+  left: 10px;
+  top: 8px;
 }
 
+/* Search input */
 #searchInput {
   width: 100%;
-  padding: 14px 16px 14px 44px;
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  font-size: 0.95rem;
-  background: var(--surface);
-  outline: none;
+  padding: 10px 10px 10px 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-#searchInput:focus {
-  border-color: var(--accent);
-}
-
-/* Filter buttons */
+/* Filter buttons container */
 .filter-strip {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
+/* Buttons */
 .filter-btn {
-  padding: 7px 18px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  border: 1.5px solid var(--border);
-  background: var(--surface);
+  padding: 5px 10px;
+  margin: 5px 5px 0 0;
+  border: 1px solid #ccc;
+  background-color: white;
   cursor: pointer;
 }
 
+/* Active button */
 .filter-btn.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
+  background-color: #333;
+  color: white;
 }
