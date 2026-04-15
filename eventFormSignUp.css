@@ -1,5 +1,4 @@
-/*Change if needsbe for the req part*/
 .required::after {
         content: ' *';
         color: red;
-}/*WIP*/
+}
