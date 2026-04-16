@@ -33,6 +33,9 @@
         <button class="filter-btn" data-cat="Culture">Culture</button>
       </div>
 
+      <h2>All Events</h2>
+      <div id="eventsContainer"></div>
+      
       <h1>Add Event</h1>
 
       <form>
@@ -48,10 +51,14 @@
                 oninput="setCustomValidity('')"><br>
 
           <select>
-            <!--TBD-->
             <option>Choose Event</option>
+            <option>Sports</option>
+            <option>Study</option>
+            <option>Social</option>
+            <option>Culture</option>
           </select>
 
+          <br><br>
           <button type="submit" id="submitButton">Add Event</button>
         </form>
     </div>
