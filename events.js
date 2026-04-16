@@ -1,12 +1,108 @@
+// List of all student events
+
+const events = [
+
+    {
+    id: 1,
+    title: "5-a-side Football Tournament",
+    category: "Sports",
+    date: "2026-04-27",
+    time: "5:00 PM",
+    location: "Nelson place",
+    icon: "⚽"
+    },
+    
+    {
+    id: 2,
+    title: "Freshers Mixer Night",
+    category: "Social",
+    date: "2026-05-06",
+    time: "7:00 PM",
+    location: "Student Union Bar",
+    icon: "🎉"
+    },
+    
+    {
+    id: 3,
+    title: "Maths Study Group",
+    category: "Study",
+    date: "2026-05-18",
+    time: "3:00 PM",
+    location: "Library Room 120",
+    icon: "📚"
+    },
+    
+    {
+    id: 4,
+    title: "Drama Society Showcase",
+    category: "Culture",
+    date: "2026-05-26",
+    time: "6:00 PM",
+    location: "BC-03-311",
+    icon: "🎭"
+    },
+    
+    {
+    id: 5,
+    title: "Basketball Open Run",
+    category: "Sports",
+    date: "2026-06-02",
+    time: "5:30 PM",
+    location: "Jordanstown",
+    icon: "🏀"
+    },
+    
+    {
+    id: 6,
+    title: "Career Fair Workshop",
+    category: "Study",
+    date: "2026-06-17",
+    time: "11:00 AM",
+    location: "LG-00-211",
+    icon: "💼"
+    },
+    
+    {
+    id: 7,
+    title: "International Food Festival",
+    category: "Social",
+    date: "2026-06-23",
+    time: "1:00 PM",
+    location: "Student Union",
+    icon: "🍜"
+    },
+    
+    {
+    id: 8,
+    title: "Sharing Cultural Identity",
+    category: "Culture",
+    date: "2026-07-01",
+    time: "11:00 AM",
+    location: "Ulster University",
+    icon: "🫱🏽‍🫲🏾🌍"
+    }
+    
+    ];
+    
+    // Function to open the event details page
+    
+    function openEvent(id){
+    
+    localStorage.setItem("selectedEvent", id);
+    
+    window.location.href = "event-details.html";
+    
+    }
+
 function validateFormData(){
-    let button = document.getElementById("submitButton");
+  let button = document.getElementById("submitButton");
     button.addEventListener("click", function(event){
         event.preventDefault();
 
         let eventTitle = document.getElementById("eventTitle").value;
         let eventDate = document.getElementById("eventDate").value;
-        let eTitleRegex= "/^[a-zA-Z ]+$/";
-        let eDateRegex= "/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\x01|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\x02))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\x03(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\x04(?:(?:1[6-9]|[2-9]\d)?\d{2})$/";
+        let eTitleRegex= /^[a-zA-Z ]+$/; // Only letters and spaces allowed
+        let eDateRegex= /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD format
         let eTitleValid = RegExp(eTitleRegex).test(eventTitle);
         let eDateValid = RegExp(eDateRegex).test(eventDate);
         
@@ -28,8 +124,8 @@ var searchQuery = '';
 function getFilteredEvents() {
   var results = [];
 
-  for (var i = 0; i < EVENTS.length; i++) {
-    var ev = EVENTS[i];
+  for (var i = 0; i < events.length; i++) {
+    var ev = events[i];
 
     var categoryMatch =
       (activeCategory === 'All') ||
@@ -52,14 +148,19 @@ function getFilteredEvents() {
 }
 
 // SEARCH INPUT
-document.getElementById('searchInput').addEventListener('input', function () {
-  searchQuery = this.value.trim();
-  renderEvents(); // calls Person 2's function
-});
+  var searchBox = document.getElementById('searchInput');
+
+if (searchBox) {
+  searchBox.addEventListener('input', function () {
+    searchQuery = this.value.trim();
+    renderEvents();
+  });
+}
 
 // CATEGORY BUTTONS
 var btns = document.querySelectorAll('.filter-btn');
 
+if (btns.length > 0) {
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener('click', function () {
 
@@ -76,3 +177,36 @@ for (var i = 0; i < btns.length; i++) {
     renderEvents(); // re-render events
   });
 }
+}
+
+function renderEvents() {
+  var container = document.getElementById("eventsContainer");
+
+  if (!container) return; //  prevents crashes
+
+  var filtered = getFilteredEvents();
+
+  container.innerHTML = "";
+
+  if (filtered.length === 0) {
+    container.innerHTML = "<p>No events found.</p>";
+    return;
+  }
+
+  for (var i = 0; i < filtered.length; i++) {
+    var ev = filtered[i];
+
+    container.innerHTML += `
+      <div class="event-card" onclick="openEvent(${ev.id})">
+        <h3>${ev.icon} ${ev.title}</h3>
+        <p>${ev.category}</p>
+        <p>${ev.date} - ${ev.time}</p>
+        <p>${ev.location}</p>
+      </div>
+    `;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  renderEvents();
+});
