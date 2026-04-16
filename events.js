@@ -101,12 +101,15 @@ function validateFormData(){
 
         let eventTitle = document.getElementById("eventTitle").value;
         let eventDate = document.getElementById("eventDate").value;
+        let eventTime = document.getElementById("eventTime").value;
         let eTitleRegex= /^[a-zA-Z ]+$/; // Only letters and spaces allowed
         let eDateRegex= /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD format
+        let eTimeRegex; /^([01]\d|2[0-3]):?([0-5]\d)$/ // HH:MM:SS format, 24hr. Made 12hr later.
         let eTitleValid = RegExp(eTitleRegex).test(eventTitle);
         let eDateValid = RegExp(eDateRegex).test(eventDate);
+        let eTimeValid = RegExp(eTimeRegex).test(eventTime);
         
-        if(eTitleValid && eDateValid){
+        if(eTitleValid && eDateValid&& eTimeValid){
             alert("Form submitted successfully!");
             //CHECK IF WORKS AS INTENDED
             event.target.form.submit();
