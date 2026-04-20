@@ -1,9 +1,3 @@
-/* Required field asterisk */
-.required::after {
-  content: ' *';
-  color: red;
-}
-
 /* Search bar container */
 .search-wrap {
   position: relative;
