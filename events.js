@@ -1,6 +1,5 @@
-//Keeping this intact. Don't think events should be const. At least this way the stuff won't delete.
+//Global variable & global variable logic begin
 const baseEvents = [
-
     {
     id: 1,
     title: "5-a-side Football Tournament",
@@ -80,27 +79,71 @@ const baseEvents = [
     location: "Ulster University",
     icon: "🫱🏽‍🫲🏾🌍"
     }
-    
-    ];
+];
 // List of all student events
 var events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
+
+var activeCategory = 'All';
+var searchQuery = '';
+
+// SEARCH INPUT
+var searchBox = document.getElementById('searchInput');
+
+if (searchBox) {
+  searchBox.addEventListener('input', function () {
+    searchQuery = this.value.trim();
+    renderEvents();
+  });
+}
+//SEARCH INPUT END
+
+// CATEGORY BUTTONS
+var btns = document.querySelectorAll('.filter-btn');
+
+if (btns.length > 0) {
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function () {
+
+    // remove active from all
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].classList.remove('active');
+    }
+
+    // add active to clicked
+    this.classList.add('active');
+
+    activeCategory = this.dataset.cat;
+
+    renderEvents(); // re-render events
+    });
+  }
+}
+//CATEGORY BUTTON END
+
+//Global variable end
 
 function save() {
     localStorage.setItem("events", JSON.stringify(events)); //overwrites. Saved to client only
 }
+save();//not entirely necessary, but makes the JSON out of good practice.
 
-localStorage.setItem("events", JSON.stringify(events));
-
-    // Function to open the event details page
-    
-    function openEvent(id){
-    
+// Function to open the event details page   
+function openEvent(id){    
     localStorage.setItem("selectedEvent", id);
-    
     window.location.href = "event-details.html";
-    
-    }
-
+}
+//matches and thus creates event. Overwrites JSON with appended array.
+function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
+    let nextId = Math.max(events.map(event => event.id)) + 1;
+    events.push({id: nextId,
+                 title: eventTitle,
+                 category: eventCategory,
+                 date: eventDate,
+                 time: eventTime,
+                 location: eventLocation,
+                 icon: eventIcon}
+               ); save();
+}
 function validateFormData(){
   let button = document.getElementById("submitButton");
     button.addEventListener("click", function(event){
@@ -116,7 +159,7 @@ function validateFormData(){
         let eTitleRegex= /^[a-zA-Z ]+$/; // Only letters and spaces allowed
         let eDateRegex= /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD format
         let eTimeRegex= /^([01]\d|2[0-3]):([0-5]\d)$/; // HH:MM format, 24hr. Resolves AM and PM later.
-        let eTimeAMPMRegex= /^([01]\d|2[0-3]):([0-5]\d) (A|P)M$/; // HH:MM format, 12hr, needs AM or PM entered.
+        let eTimeAMPMRegex= /^([01]\d|2[0-3]):([0-5]\d) (A|P)M$/; // HH:MM format, 12hr, needs AM or PM entered. Requires : and the ' '
         let eLocationRegex = /^[a-zA-Z0-9 ',-]+$/; //Only letters, spaces, possible necessary punctuation and numbers allowed.
        
         let eTitleValid = RegExp(eTitleRegex).test(eventTitle);
@@ -128,17 +171,19 @@ function validateFormData(){
             
         if(eTitleValid && eDateValid&& eTimeValid&&eTypeValid&&eIconValid&&eLocationValid){
             alert("Form submitted successfully!");
-            let eTimeRegex12hr= /^(1[3-9]|2[0-3])/;
-            if(RegExp(eTimeRegex12hr).test(eventTime)){
-                eventTime=eventTime - 12;
-                eventTime+=" PM";
-            }
-            let eTime12thHour = /^(12)/;
-            else if(RegExp(eTime12thHour).test(eventTime)){
-                eventTime+=" PM";
-            }
-            else if(RegExp(eTimeRegex).test(eventTime)){
-                eventTime+=" AM";
+            //For 24hr extra validation and parity
+            let [hours, restOfStuff] = eventTime.split(':');
+            hours = parseInt(hours);
+            if(RegExp(eTimeRegex).test(eventTime)){
+                if(hours>12){
+                    eventTime=${hours-12}+restOfStuff+" PM";
+                }
+                else if(hours==12){
+                    eventTime+=" PM";
+                }
+                else{
+                    eventTime+=" AM";
+                }
             }
             CreateNewEvent(eventTitle, eventDate, eventTime, eventType, eventLocation, eventIcon); 
             //CHECK IF WORKS AS INTENDED
@@ -146,26 +191,8 @@ function validateFormData(){
         }
         //No need for an else, html custom validation message.
     });
-};
-
-function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
-    let nextId = Math.max(events.map(event => event.id)) + 1;
-    events.push(
-        {id: nextId,
-    title: eventTitle,
-    category: eventCategory,
-    date: eventDate,
-    time: eventTime,
-    location: eventLocation,
-    icon: eventIcon}
-        );
-    save();
 }
-
 validateFormData();
-
-var activeCategory = 'All';
-var searchQuery = '';
 
 // FILTER LOGIC
 function getFilteredEvents() {
@@ -184,7 +211,7 @@ function getFilteredEvents() {
       (query === '') ||
       ev.title.toLowerCase().indexOf(query) !== -1 ||
       ev.location.toLowerCase().indexOf(query) !== -1 ||
-      ev.category.toLowerCase().indexOf(query) !== -1;
+      ev.category.toLowerCase().indexOf(query) !== -1; 
 
     if (categoryMatch && searchMatch) {
       results.push(ev);
@@ -192,38 +219,6 @@ function getFilteredEvents() {
   }
 
   return results;
-}
-
-// SEARCH INPUT
-  var searchBox = document.getElementById('searchInput');
-
-if (searchBox) {
-  searchBox.addEventListener('input', function () {
-    searchQuery = this.value.trim();
-    renderEvents();
-  });
-}
-
-// CATEGORY BUTTONS
-var btns = document.querySelectorAll('.filter-btn');
-
-if (btns.length > 0) {
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener('click', function () {
-
-    // remove active from all
-    for (var j = 0; j < btns.length; j++) {
-      btns[j].classList.remove('active');
-    }
-
-    // add active to clicked
-    this.classList.add('active');
-
-    activeCategory = this.dataset.cat;
-
-    renderEvents(); // re-render events
-  });
-}
 }
 
 function renderEvents() {
@@ -242,20 +237,19 @@ function renderEvents() {
 
   var html = "";
 
-for (var i = 0; i < filtered.length; i++) {
-  var ev = filtered[i];
+  for (var i = 0; i < filtered.length; i++) {
+    var ev = filtered[i];
 
-  html += `
-    <div class="event-card" onclick="openEvent(${ev.id})">
-      <h3>${ev.icon} ${ev.title}</h3>
-      <p>${ev.category}</p>
-      <p>${ev.date} - ${ev.time}</p>
-      <p>${ev.location}</p>
-    </div>
-  `;
-}
+    html += `
+      <div class="event-card" onclick="openEvent(${ev.id})">
+        <h3>${ev.icon} ${ev.title}</h3>
+        <p>${ev.category}</p>
+        <p>${ev.date} - ${ev.time}</p>
+        <p>${ev.location}</p>
+      </div>`;
+  }
 
-container.innerHTML = html;
+  container.innerHTML = html;
 }
 
 if (document.readyState === "loading") {
