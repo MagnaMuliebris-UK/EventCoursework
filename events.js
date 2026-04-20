@@ -122,17 +122,19 @@ if (btns.length > 0) {
 
 //Global variable end
 
+//Makes localstorage save of stored events
 function save() {
-    localStorage.setItem("events", JSON.stringify(events)); //overwrites. Saved to client only
+    localStorage.setItem("events", JSON.stringify(events));
 }
-save();//not entirely necessary, but makes the JSON out of good practice.
+save();
 
 // Function to open the event details page   
 function openEvent(id){    
     localStorage.setItem("selectedEvent", id);
     window.location.href = "event-details.html";
 }
-//matches and thus creates event. Overwrites JSON with appended array.
+
+//matches and thus creates event.
 function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
     let nextId = Math.max(events.map(event => event.id)) + 1;
     events.push({id: nextId,
@@ -144,52 +146,75 @@ function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLo
                  icon: eventIcon}
                ); save();
 }
+
+//Validates all data.
 function validateFormData(){
   let button = document.getElementById("submitButton");
     button.addEventListener("click", function(event){
         event.preventDefault();
 
+        //eventTitle
         let eventTitle = document.getElementById("eventTitle").value;
-        let eventDate = document.getElementById("eventDate").value;
-        let eventTime = document.getElementById("eventTime").value;
-        let eventType = document.getElementById("eventType").selectedOptions; //Checks if 
-        let eventLocation = document.getElementById("eventLocation").value;
-        let eventIcon = document.getElementById("eventIcon").selectedOptions; //Idk what the options available should be!
-        
         let eTitleRegex= /^[a-zA-Z ]+$/; // Only letters and spaces allowed
-        let eDateRegex= /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD format
-        let eTimeRegex= /^([01]\d|2[0-3]):([0-5]\d)$/; // HH:MM format, 24hr. Resolves AM and PM later.
-        let eTimeAMPMRegex= /^([01]\d|2[0-3]):([0-5]\d) (A|P)M$/; // HH:MM format, 12hr, needs AM or PM entered. Requires : and the ' '
-        let eLocationRegex = /^[a-zA-Z0-9 ',-]+$/; //Only letters, spaces, possible necessary punctuation and numbers allowed.
-       
         let eTitleValid = RegExp(eTitleRegex).test(eventTitle);
+
+        //eventDate
+        let eventDate = document.getElementById("eventDate").value;
+        let eDateRegex= /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD format
         let eDateValid = RegExp(eDateRegex).test(eventDate);
-        let eTimeValid = RegExp(eTimeRegex).test(eventTime)||RegExp(eTimeAMPMRegex).test(eventTime);//Checks if satiates either. Will not bother with if else if statements if its 2nd one
+
+        //eventTime (12hr and 24hr appropriate)
+        let eventTime = document.getElementById("eventTime").value;
+        let eTimeRegex= /^([01]\d|2[0-3]):([0-5]\d)$/; // HH:MM format, 24hr. Resolves AM and PM later.
+        let eTimeAMPMRegex= /^(0[1-9]|1[0-2]):([0-5]\d) (A|P)M$/; // HH:MM format, 12hr, needs AM or PM entered. Requires : and the ' '
+        let eTimeValid = RegExp(eTimeRegex).test(eventTime)||RegExp(eTimeAMPMRegex).test(eventTime);//Checks if satiates either.
+
+        //eventType
+        let eventType = document.getElementById("eventType").selectedOptions;
         let eTypeValid = !(eventType=="Choose Event Category");
-        let eIconValid = !(eventIcon=="Choose Icon");
+
+        //eventLocation
+        let eventLocation = document.getElementById("eventLocation").value;
         let eLocationValid = RegExp(eLocationRegex).test(eventLocation);
-            
-        if(eTitleValid && eDateValid&& eTimeValid&&eTypeValid&&eIconValid&&eLocationValid){
+        let eLocationRegex = /^[a-zA-Z0-9 ',-]+$/; //Only letters, spaces, possible necessary punctuation and numbers allowed.
+
+        //eventIcon
+        let eventIcon = document.getElementById("eventIcon").selectedOptions;
+        let eIconValid = !(eventIcon=="Choose Icon");
+
+        if(eTitleValid && eDateValid &&
+           eTimeValid && eTypeValid &&
+           eIconValid && eLocationValid){
             alert("Form submitted successfully!");
-            //For 24hr extra validation and parity
-            let [hours, restOfStuff] = eventTime.split(':');
-            hours = parseInt(hours);
+            
+            //eventTime 24hr to 12hr converter. Ignores if already 12hr
             if(RegExp(eTimeRegex).test(eventTime)){
+                //for sorting. restOfStuff readded later
+                let [hours, restOfStuff] = eventTime.split(':');
+                hours = parseInt(hours);
+                //if PM and not noon
                 if(hours>12){
-                    eventTime=${hours-12}+restOfStuff+" PM";
+                    eventTime=${hours-12}+${restOfStuff}+" PM";
                 }
+                //if noon
                 else if(hours==12){
                     eventTime+=" PM";
                 }
-                else{
+                //if AM and not midnight
+                else if(hours!=0{
                     eventTime+=" AM";
                 }
+                //if midnight
+                else{
+                    eventTime=${hours+12}+${restOfStuff}+" AM";
+                }
             }
-            CreateNewEvent(eventTitle, eventDate, eventTime, eventType, eventLocation, eventIcon); 
-            //CHECK IF WORKS AS INTENDED
+            CreateNewEvent(eventTitle, eventDate, eventTime, eventType, eventLocation, eventIcon);
             event.target.form.submit();
         }
-        //No need for an else, html custom validation message.
+        else{
+        //handled in html
+        }
     });
 }
 validateFormData();
@@ -220,11 +245,13 @@ function getFilteredEvents() {
 
   return results;
 }
+//FILTER LOGIC END
 
+//RENDER EVENT START
 function renderEvents() {
   var container = document.getElementById("eventsContainer");
 
-  if (!container) return; //  prevents crashes
+  if (!container) return; //prevents crashes
 
   var filtered = getFilteredEvents();
 
@@ -251,6 +278,7 @@ function renderEvents() {
 
   container.innerHTML = html;
 }
+//RENDER EVENT END
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", renderEvents);
