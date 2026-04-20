@@ -1,1 +1,5 @@
-/*FOR ANY FORMATTING THAT SPANS MULTIPLE PAGES*/
+/* Required field asterisk */
+.required::after {
+  content: ' *';
+  color: red;
+}
