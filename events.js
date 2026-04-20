@@ -116,7 +116,7 @@ function validateFormData(){
         let eTitleRegex= /^[a-zA-Z ]+$/; // Only letters and spaces allowed
         let eDateRegex= /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD format
         let eTimeRegex= /^([01]\d|2[0-3]):([0-5]\d)$/; // HH:MM format, 24hr. Resolves AM and PM later.
-        let eTimeAMPMRegex= /^([01]\d|2[0-3]):([0-5]\d) ?(A|P)M$/; // HH:MM format, 12hr, needs AM or PM entered. Space after time not crucial
+        let eTimeAMPMRegex= /^([01]\d|2[0-3]):([0-5]\d) (A|P)M$/; // HH:MM format, 12hr, needs AM or PM entered.
         let eLocationRegex = /^[a-zA-Z0-9 ',-]+$/; //Only letters, spaces, possible necessary punctuation and numbers allowed.
        
         let eTitleValid = RegExp(eTitleRegex).test(eventTitle);
