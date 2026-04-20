@@ -82,15 +82,19 @@ const baseEvents = [
 ];
 // List of all student events
 var events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
-
+// Tracks which category filter is currently active. Defaults to All
 var activeCategory = 'All';
+// Tracks the current search query entered by the user
 var searchQuery = '';
 
 // SEARCH INPUT
+// Gets the search input element from the DOM
 var searchBox = document.getElementById('searchInput');
 
 if (searchBox) {
+    // Fires every time the user types in the search box
   searchBox.addEventListener('input', function () {
+      // Updates searchQuery with the current input, trimming whitespace
     searchQuery = this.value.trim();
     renderEvents();
   });
@@ -98,22 +102,23 @@ if (searchBox) {
 //SEARCH INPUT END
 
 // CATEGORY BUTTONS
+// Gets all filter buttons from the DOM
 var btns = document.querySelectorAll('.filter-btn');
 
 if (btns.length > 0) {
   for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener('click', function () {
 
-    // remove active from all
+    // Removes active highlight from all buttons
     for (var j = 0; j < btns.length; j++) {
       btns[j].classList.remove('active');
     }
 
-    // add active to clicked
+    // Highlights the clicked button as active
     this.classList.add('active');
-
+    // Updates activeCategory to the clicked button's category value
     activeCategory = this.dataset.cat;
-
+    // Re-renders events filtered by the new category
     renderEvents(); // re-render events
     });
   }
@@ -136,7 +141,7 @@ function openEvent(id){
 
 //matches and thus creates event.
 function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
-    let nextId = Math.max(events.map(event => event.id)) + 1;
+    let nextId = Math.max(...events.map(e => e.id)) + 1;
     events.push({id: nextId,
                  title: eventTitle,
                  category: eventCategory,
@@ -171,16 +176,16 @@ function validateFormData(){
 
         //eventType
         let eventType = document.getElementById("eventType").selectedOptions;
-        let eTypeValid = !(eventType=="Choose Event Category");
+        let eTypeValid = document.getElementById("eventType").value !== "Choose Event Category";
 
         //eventLocation
         let eventLocation = document.getElementById("eventLocation").value;
-        let eLocationValid = RegExp(eLocationRegex).test(eventLocation);
         let eLocationRegex = /^[a-zA-Z0-9 ',-]+$/; //Only letters, spaces, possible necessary punctuation and numbers allowed.
+        let eLocationValid = RegExp(eLocationRegex).test(eventLocation);
 
         //eventIcon
         let eventIcon = document.getElementById("eventIcon").selectedOptions;
-        let eIconValid = !(eventIcon=="Choose Icon");
+        let eIconValid = document.getElementById("eventIcon").value !== "Choose Icon";
 
         if(eTitleValid && eDateValid &&
            eTimeValid && eTypeValid &&
@@ -194,19 +199,19 @@ function validateFormData(){
                 hours = parseInt(hours);
                 //if PM and not noon
                 if(hours>12){
-                    eventTime=${hours-12}+${restOfStuff}+" PM";
+                    eventTime=`${hours-12}:${restOfStuff} PM`;
                 }
                 //if noon
                 else if(hours==12){
                     eventTime+=" PM";
                 }
                 //if AM and not midnight
-                else if(hours!=0{
+                else if(hours !== 0){
                     eventTime+=" AM";
                 }
                 //if midnight
                 else{
-                    eventTime=${hours+12}+${restOfStuff}+" AM";
+                    eventTime=`${hours+12}:${restOfStuff} AM`;
                 }
             }
             CreateNewEvent(eventTitle, eventDate, eventTime, eventType, eventLocation, eventIcon);
@@ -220,12 +225,14 @@ function validateFormData(){
 validateFormData();
 
 // FILTER LOGIC
+// Returns only events that match both the active category and search query
 function getFilteredEvents() {
   var results = [];
 
   for (var i = 0; i < events.length; i++) {
     var ev = events[i];
-
+    
+    // Checks if event matches the selected category, or if All is selected
     var categoryMatch =
       (activeCategory === 'All') ||
       (ev.category === activeCategory);
@@ -238,6 +245,7 @@ function getFilteredEvents() {
       ev.location.toLowerCase().indexOf(query) !== -1 ||
       ev.category.toLowerCase().indexOf(query) !== -1; 
 
+    // Only includes event if it passes both checks
     if (categoryMatch && searchMatch) {
       results.push(ev);
     }
@@ -248,15 +256,18 @@ function getFilteredEvents() {
 //FILTER LOGIC END
 
 //RENDER EVENT START
+// Builds and displays the event cards based on current filters and search
 function renderEvents() {
   var container = document.getElementById("eventsContainer");
 
+  // Exits early if the container doesn't exist, prevents crashes on other pages
   if (!container) return; //prevents crashes
 
   var filtered = getFilteredEvents();
 
   container.innerHTML = "";
 
+  // Shows a message if no events match the current search/filter
   if (filtered.length === 0) {
     container.innerHTML = "<p>No events found.</p>";
     return;
@@ -264,6 +275,7 @@ function renderEvents() {
 
   var html = "";
 
+  // Loops through filtered events and builds a card for each one
   for (var i = 0; i < filtered.length; i++) {
     var ev = filtered[i];
 
@@ -276,10 +288,12 @@ function renderEvents() {
       </div>`;
   }
 
+  // Inserts all generated cards into the container at once
   container.innerHTML = html;
 }
 //RENDER EVENT END
 
+// Waits for the DOM to be ready before rendering, or renders immediately if already loaded
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", renderEvents);
 } else {
