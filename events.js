@@ -148,7 +148,7 @@ function validateFormData(){
     });
 };
 
-CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
+function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
     let nextId = Math.max(events.map(event => event.id)) + 1;
     events.push(
         {id: nextId,
@@ -240,20 +240,26 @@ function renderEvents() {
     return;
   }
 
-  for (var i = 0; i < filtered.length; i++) {
-    var ev = filtered[i];
+  var html = "";
 
-    container.innerHTML += `
-      <div class="event-card" onclick="openEvent(${ev.id})">
-        <h3>${ev.icon} ${ev.title}</h3>
-        <p>${ev.category}</p>
-        <p>${ev.date} - ${ev.time}</p>
-        <p>${ev.location}</p>
-      </div>
-    `;
-  }
+for (var i = 0; i < filtered.length; i++) {
+  var ev = filtered[i];
+
+  html += `
+    <div class="event-card" onclick="openEvent(${ev.id})">
+      <h3>${ev.icon} ${ev.title}</h3>
+      <p>${ev.category}</p>
+      <p>${ev.date} - ${ev.time}</p>
+      <p>${ev.location}</p>
+    </div>
+  `;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+container.innerHTML = html;
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", renderEvents);
+} else {
   renderEvents();
-});
+}
