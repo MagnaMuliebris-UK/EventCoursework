@@ -1,6 +1,5 @@
-// List of all student events
-
-const events = [
+//Keeping this intact. Don't think events should be const. At least this way the stuff won't delete.
+const baseEvents = [
 
     {
     id: 1,
@@ -83,7 +82,15 @@ const events = [
     }
     
     ];
-    
+// List of all student events
+var events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
+
+function save() {
+    localStorage.setItem("events", JSON.stringify(events)); //overwrites. Saved to client only
+}
+
+localStorage.setItem("events", JSON.stringify(events));
+
     // Function to open the event details page
     
     function openEvent(id){
@@ -102,23 +109,58 @@ function validateFormData(){
         let eventTitle = document.getElementById("eventTitle").value;
         let eventDate = document.getElementById("eventDate").value;
         let eventTime = document.getElementById("eventTime").value;
-        let eventType = document.getElementById("eventType").selectedOptions;
+        let eventType = document.getElementById("eventType").selectedOptions; //Checks if 
+        let eventLocation = document.getElementById("eventLocation").value;
+        let eventIcon = document.getElementById("eventIcon").selectedOptions; //Idk what the options available should be!
+        
         let eTitleRegex= /^[a-zA-Z ]+$/; // Only letters and spaces allowed
         let eDateRegex= /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD format
-        let eTimeRegex; /^([01]\d|2[0-3]):?([0-5]\d)$/ // HH:MM format, 24hr. Made 12hr later.
+        let eTimeRegex= /^([01]\d|2[0-3]):([0-5]\d)$/; // HH:MM format, 24hr. Resolves AM and PM later.
+        let eTimeAMPMRegex= /^([01]\d|2[0-3]):([0-5]\d) ?(A|P)M$/; // HH:MM format, 12hr, needs AM or PM entered. Space after time not crucial
+        let eLocationRegex = /^[a-zA-Z0-9 ',-]+$/; //Only letters, spaces, possible necessary punctuation and numbers allowed.
+       
         let eTitleValid = RegExp(eTitleRegex).test(eventTitle);
         let eDateValid = RegExp(eDateRegex).test(eventDate);
-        let eTimeValid = RegExp(eTimeRegex).test(eventTime);
-        let eTypeValid = !(eventType=="Choose Event Category")
+        let eTimeValid = RegExp(eTimeRegex).test(eventTime)||RegExp(eTimeAMPMRegex).test(eventTime);//Checks if satiates either. Will not bother with if else if statements if its 2nd one
+        let eTypeValid = !(eventType=="Choose Event Category");
+        let eIconValid = !(eventIcon=="Choose Icon");
+        let eLocationValid = RegExp(eLocationRegex).test(eventLocation);
             
-        if(eTitleValid && eDateValid&& eTimeValid&&eTypeValid){
+        if(eTitleValid && eDateValid&& eTimeValid&&eTypeValid&&eIconValid&&eLocationValid){
             alert("Form submitted successfully!");
+            let eTimeRegex12hr= /^(1[3-9]|2[0-3]);
+            if(RegExp(eTimeRegex12hr).test(eventTime)){
+                eventTime=eventTime - 12;
+                eventTime+=" PM";
+            }
+            let eTime12thHour = /^(12);
+            else if(RegExp(eTime12thHour).test(eventTime)){
+                eventTime+=" PM";
+            }
+            else if(RegExp(eTimeRegex).test(eventTime)){
+                eventTime+=" AM";
+            }
+            CreateNewEvent(eventTitle, eventDate, eventTime, eventType, eventLocation, eventIcon); 
             //CHECK IF WORKS AS INTENDED
             event.target.form.submit();
         }
         //No need for an else, html custom validation message.
     });
 };
+
+CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
+    let nextId = Math.max(events.map(event => event.id)) + 1;
+    events.push(
+        {id: nextId,
+    title: eventTitle,
+    category: eventCategory,
+    date: eventDate,
+    time: eventTime,
+    location: eventLocation,
+    icon: eventIcon}
+        );
+    save();
+}
 
 validateFormData();
 
