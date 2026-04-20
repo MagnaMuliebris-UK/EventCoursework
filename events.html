@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <script src="events.js" defer></script>
+      <script src="events.js" defer></script> <!--Delete reminder later: Possible issue with defer?-->
       <link rel="stylesheet" href="generalFormatting.css">
       <link rel="stylesheet" href="events.css">
     </head>
@@ -62,7 +62,18 @@
             <option>Social</option>
             <option>Culture</option>
           </select>
-
+        <label class = "required" for="eventLocation">Event Location:</label><br>
+                <input type="text" id="eventLocation" name="eventLocation" required 
+                placeholder="Enter Event Location"
+                oninvalid="this.setCustomValidity('Enter Event Location Here')"
+                oninput="setCustomValidity('')"><br>
+        <select id="eventIcon">
+            <option>Choose Icon</option>
+            <option></option><!--ADD THESE PLEASE-->
+            <option></option>
+            <option></option>
+            <option></option>
+          </select>
           <br><br>
           <button type="submit" id="submitButton">Add Event</button>
         </form>
