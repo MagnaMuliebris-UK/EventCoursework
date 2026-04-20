@@ -128,12 +128,12 @@ function validateFormData(){
             
         if(eTitleValid && eDateValid&& eTimeValid&&eTypeValid&&eIconValid&&eLocationValid){
             alert("Form submitted successfully!");
-            let eTimeRegex12hr= /^(1[3-9]|2[0-3]);
+            let eTimeRegex12hr= /^(1[3-9]|2[0-3])/;
             if(RegExp(eTimeRegex12hr).test(eventTime)){
                 eventTime=eventTime - 12;
                 eventTime+=" PM";
             }
-            let eTime12thHour = /^(12);
+            let eTime12thHour = /^(12)/;
             else if(RegExp(eTime12thHour).test(eventTime)){
                 eventTime+=" PM";
             }
@@ -148,7 +148,7 @@ function validateFormData(){
     });
 };
 
-CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
+function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
     let nextId = Math.max(events.map(event => event.id)) + 1;
     events.push(
         {id: nextId,
