@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <script src="events.js"></script>
-      <style src="generalFormatting.css"></style>
-      <style src="events.css"></style>
+      <script src="events.js" defer></script> <!--Delete reminder later: Possible issue with defer?-->
+      <link rel="stylesheet" href="generalFormatting.css">
+      <link rel="stylesheet" href="events.css">
     </head>
   <body>
 
@@ -17,6 +17,25 @@
 
     <!-- CONTENT -->
     <div class="content">
+
+      <!-- Search bar -->
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search events, locations…" autocomplete="off" />
+      </div>
+
+      <!-- Category filter buttons -->
+      <div class="filter-strip" id="filterStrip">
+        <button class="filter-btn active" data-cat="All">All</button>
+        <button class="filter-btn" data-cat="Sports">Sports</button>
+        <button class="filter-btn" data-cat="Study">Study</button>
+        <button class="filter-btn" data-cat="Social">Social</button>
+        <button class="filter-btn" data-cat="Culture">Culture</button>
+      </div>
+
+      <h2>All Events</h2>
+      <div id="eventsContainer"></div>
+      
       <h1>Add Event</h1>
 
       <form>
@@ -30,12 +49,36 @@
                 placeholder="Enter Event Date"
                 oninvalid="this.setCustomValidity('Enter Event Date Here')"
                 oninput="setCustomValidity('')"><br>
+        <label class = "required" for="eventTime">Event Time:</label><br>
+                <input type="time" id="eventTime" name="eventTime" required 
+                placeholder="Enter Event Time"
+                oninvalid="this.setCustomValidity('Enter Event Time Here')"
+                oninput="setCustomValidity('')"><br>
 
-          <select>
-            <!--TBD-->
-            <option>Choose Event</option>
+        <select id="eventType">
+            <option>Choose Event Category</option>
+            <option>Sports</option>
+            <option>Study</option>
+            <option>Social</option>
+            <option>Culture</option>
           </select>
-
+        <label class = "required" for="eventLocation">Event Location:</label><br>
+                <input type="text" id="eventLocation" name="eventLocation" required 
+                placeholder="Enter Event Location"
+                oninvalid="this.setCustomValidity('Enter Event Location Here')"
+                oninput="setCustomValidity('')"><br>
+        <select id="eventIcon">
+            <option>Choose Icon</option>
+            <option>⚽</option>
+            <option>🎉</option>
+            <option>📚</option>
+            <option>🎭</option>
+            <option>🏀</option>
+            <option>💼</option>
+            <option>🍜</option>
+            <option>🫱🏽‍🫲🏾🌍</option>
+          </select>
+          <br><br>
           <button type="submit" id="submitButton">Add Event</button>
         </form>
     </div>

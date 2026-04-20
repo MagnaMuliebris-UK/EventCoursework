@@ -1,5 +1,46 @@
-/*Change if needsbe for the req part*/
+/* Required field asterisk */
 .required::after {
-        content: ' *';
-        color: red;
-}/*WIP*/
+  content: ' *';
+  color: red;
+}
+
+/* Search bar container */
+.search-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Search icon */
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+}
+
+/* Search input */
+#searchInput {
+  width: 100%;
+  padding: 10px 10px 10px 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Filter buttons container */
+.filter-strip {
+  margin-top: 10px;
+}
+
+/* Buttons */
+.filter-btn {
+  padding: 5px 10px;
+  margin: 5px 5px 0 0;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* Active button */
+.filter-btn.active {
+  background-color: #333;
+  color: white;
+}
