@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -21,7 +21,7 @@
   <div class="logo">Campus<span>Events</span></div>
   <div class="nav-links" id="navLinks">
     <a class="active">Home</a>
-    <a>Browse Events</a>
+    <a href="browse-events.html">Browse Events</a>
   </div>
   <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
 </nav>
@@ -35,8 +35,10 @@
     </div>
     <h1>Your campus,<br><em>always alive.</em></h1>
     <p>Find sports matches, study sessions, socials, and more — all happening around you right now.</p>
-    <button class="btn btn-primary">Browse Events</button>
-    <button class="btn btn-outline">View All →</button>
+    <a href="browse-events.html">
+        <button class="btn btn-primary">Browse Events</button>
+        </a>
+    
   </div>
   <div class="hero-visual">
     <div class="hero-card">
@@ -112,5 +114,7 @@
 </div>
  
 <script src="index.js"></script>
+<script src="all-events.js"></script>
+<script src="events.js"></script>
 </body>
 </html>
