@@ -1,38 +1,5 @@
-const EVENTS = [
-  {
-    id: 1,
-    title: '5-a-side Football Tournament',
-    category: 'Sports',
-    emoji: '⚽',
-    bg: '#e6f3ec',
-    date: 'Mon 14 Apr 2026',
-    time: '5:00 PM',
-    location: 'South Sports Field',
-    tag: 'tag-sports'
-  },
-  {
-    id: 2,
-    title: 'Freshers Mixer Night',
-    category: 'Social',
-    emoji: '🎉',
-    bg: '#fdf0ea',
-    date: 'Fri 18 Apr 2026',
-    time: '7:00 PM',
-    location: 'Student Union Bar',
-    tag: 'tag-social'
-  },
-  {
-    id: 3,
-    title: 'Maths Study Group',
-    category: 'Study',
-    emoji: '📚',
-    bg: '#e6eef9',
-    date: 'Wed 16 Apr 2026',
-    time: '2:00 PM',
-    location: 'Library Room 3',
-    tag: 'tag-study'
-  },
-];
+import {events} from './events.js';
+const EVENTS = [...events];
  
 // Load saved favourites from localStorage
 let favorites = new Set(JSON.parse(localStorage.getItem('campusFavs') || '[]'));
