@@ -296,7 +296,7 @@ function renderEvents() {
     var ev = filtered[i];
 
     html += `
-      <div class="event-card" onclick="openEvent(${ev.id})">
+      <div class="event-card" onclick="openEvent(events.find(e => e.id === ${ev.id}))">
         <div class="event-image ${ev.category.toLowerCase()}">
           <span class="category-btn">${ev.category}</span>
           ${ev.icon}
