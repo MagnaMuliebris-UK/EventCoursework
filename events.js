@@ -90,7 +90,6 @@ const baseEvents = [
 ];
 // List of all student events
 var events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
-export{events};
 
 // Tracks which category filter is currently active. Defaults to All
 var activeCategory = 'All';
@@ -137,9 +136,11 @@ if (btns.length > 0) {
 
 //Global variable end
 
-//Makes localstorage save of stored events
+//Makes localstorage save of stored events, and some other likely necessary work
 function save() {
     localStorage.setItem("events", JSON.stringify(events));
+    events = JSON.parse(localStorage.getItem("events"));
+    export{events};
 }
 save();
 
