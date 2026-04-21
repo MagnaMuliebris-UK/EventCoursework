@@ -7,7 +7,8 @@ const baseEvents = [
     date: "2026-04-27",
     time: "5:00 PM",
     location: "Nelson place",
-    icon: "⚽"
+    icon: "⚽",
+    bg: '#c6bc81'
     },
     
     {
@@ -17,7 +18,8 @@ const baseEvents = [
     date: "2026-05-06",
     time: "7:00 PM",
     location: "Student Union Bar",
-    icon: "🎉"
+    icon: "🎉",
+    bg: '#9ca2d4'
     },
     
     {
@@ -27,7 +29,8 @@ const baseEvents = [
     date: "2026-05-18",
     time: "3:00 PM",
     location: "Library Room 120",
-    icon: "📚"
+    icon: "📚",
+    bg: '#cd096c'
     },
     
     {
@@ -37,7 +40,8 @@ const baseEvents = [
     date: "2026-05-26",
     time: "6:00 PM",
     location: "BC-03-311",
-    icon: "🎭"
+    icon: "🎭",
+    bg: '#47360d'
     },
     
     {
@@ -47,7 +51,8 @@ const baseEvents = [
     date: "2026-06-02",
     time: "5:30 PM",
     location: "Jordanstown",
-    icon: "🏀"
+    icon: "🏀",
+    bg: '#a865df'
     },
     
     {
@@ -57,7 +62,8 @@ const baseEvents = [
     date: "2026-06-17",
     time: "11:00 AM",
     location: "LG-00-211",
-    icon: "💼"
+    icon: "💼",
+    bg: '#093d48'
     },
     
     {
@@ -67,7 +73,8 @@ const baseEvents = [
     date: "2026-06-23",
     time: "1:00 PM",
     location: "Student Union",
-    icon: "🍜"
+    icon: "🍜",
+    bg: '#422844'
     },
     
     {
@@ -77,7 +84,8 @@ const baseEvents = [
     date: "2026-07-01",
     time: "11:00 AM",
     location: "Ulster University",
-    icon: "🫱🏽‍🫲🏾🌍"
+    icon: "🫱🏽‍🫲🏾🌍",
+    bg: '#9b5b34'
     }
 ];
 // List of all student events
@@ -141,6 +149,11 @@ function openEvent(id){
     window.location.href = "event-details.html";
 }
 
+const getRandomHex = () => {
+  // Generates a random number, converts to hex, and pads with zeros if needed
+  return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+};
+
 //matches and thus creates event.
 function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLocation, eventIcon){
     let nextId = Math.max(...events.map(e => e.id)) + 1;
@@ -150,7 +163,8 @@ function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLo
                  date: eventDate,
                  time: eventTime,
                  location: eventLocation,
-                 icon: eventIcon}
+                 icon: eventIcon,
+                 bg: getRandomHex()}
                ); save();
 }
 
