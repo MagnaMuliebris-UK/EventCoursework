@@ -3,6 +3,8 @@
 
 <head>
 
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
 <meta charset="UTF-8">
 <title>Events App</title>
 
@@ -159,6 +161,51 @@ color:white;
 </head>
 
 <body>
+
+  <nav style="
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 64px;
+  background: rgba(245, 242, 235, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #e2ddd4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+">
+  <div style="
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #1a1a18;
+  ">
+    Campus<span style="color: #e85d26;">Events</span>
+  </div>
+  <div style="display: flex; gap: 8px;">
+    <a href="index.html" style="
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #6b6b63;
+      padding: 6px 14px;
+      border-radius: 8px;
+    ">Home</a>
+    <a href="browse-events.html" style="
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #e85d26;
+      background: #fdf0ea;
+      padding: 6px 14px;
+      border-radius: 8px;
+    ">Browse Events</a>
+  </div>
+</nav>
 
 
 <!-- ======================= -->
