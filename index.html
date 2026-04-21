@@ -1,38 +1,116 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Events Hub</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusEvents – Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="home-animated.css" />
 </head>
-
 <body>
-
-<header>
-    <h1>Campus Events Hub</h1>
-    <a href="add-event.html" class="add-btn">+ Add Event</a>
-</header>
-
-<section class="controls">
-
-    <input type="text" id="search" placeholder="Search events...">
-
-    <select id="categoryFilter">
-        <option value="all">All Categories</option>
-        
-    </select>
-
-</section>
-
-<section id="eventsContainer">
-
-    <!-- Events will appear here dynamically -->
-
-</section>
-
-<script src="js/script.js"></script>
-
+ 
+<!-- ANIMATED BACKGROUND ORBS -->
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+ 
+<!-- NAV -->
+<nav>
+  <div class="logo">Campus<span>Events</span></div>
+  <div class="nav-links" id="navLinks">
+    <a class="active">Home</a>
+    <a>Browse Events</a>
+  </div>
+  <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+ 
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="live-badge">
+      <div class="pulse-dot"></div>
+      12 events happening today
+    </div>
+    <h1>Your campus,<br><em>always alive.</em></h1>
+    <p>Find sports matches, study sessions, socials, and more — all happening around you right now.</p>
+    <button class="btn btn-primary">Browse Events</button>
+    <button class="btn btn-outline">View All →</button>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <span class="hc-tag tag-sports">⚽ Sports</span>
+      <h4>5-a-side Football</h4>
+      <p>South Field · 4pm today</p>
+    </div>
+    <div class="hero-card">
+      <span class="hc-tag tag-social">🎉 Social</span>
+      <h4>Freshers Mixer</h4>
+      <p>Student Union · 7pm Fri</p>
+    </div>
+    <div class="hero-card">
+      <span class="hc-tag tag-study">📚 Study</span>
+      <h4>Maths Study Group</h4>
+      <p>Library Rm 3 · 2pm Wed</p>
+    </div>
+    <div class="hero-card">
+      <span class="hc-tag tag-culture">🎭 Culture</span>
+      <h4>Drama Society Showcase</h4>
+      <p>Arts Centre · Sat 6pm</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item"><span class="ticker-dot"></span> &#x26BD; Football Tournament — Today 4pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#127881; Freshers Mixer — Friday 7pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#128218; Maths Study Group — Wednesday 2pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#127917; Drama Showcase — Saturday 6pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#127936; Basketball Open Run — Tuesday 5:30pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#128188; Career Fair Prep — Thursday 11am</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#127836; International Food Festival — Saturday 12pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#128247; Photography Club Walk — Sunday 10am</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item"><span class="ticker-dot"></span> &#x26BD; Football Tournament — Today 4pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#127881; Freshers Mixer — Friday 7pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#128218; Maths Study Group — Wednesday 2pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#127917; Drama Showcase — Saturday 6pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#127936; Basketball Open Run — Tuesday 5:30pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#128188; Career Fair Prep — Thursday 11am</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#127836; International Food Festival — Saturday 12pm</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> &#128247; Photography Club Walk — Sunday 10am</span>
+  </div>
+</div>
+ 
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">120+</span><div class="stat-label">Active Events</div></div>
+  <div class="stat"><span class="stat-num">34</span><div class="stat-label">Student Societies</div></div>
+  <div class="stat"><span class="stat-num">5</span><div class="stat-label">Categories</div></div>
+  <div class="stat"><span class="stat-num">2.4k</span><div class="stat-label">Students Going</div></div>
+</div>
+ 
+<!-- FEATURED EVENTS -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Happening soon</div>
+      <div class="section-sub">Don't miss out — these events are coming up this week.</div>
+    </div>
+    <a class="see-all">See all events →</a>
+  </div>
+  <div class="featured-grid" id="home-featured"></div>
+</div>
+ 
+<!-- FOOTER -->
+<div class="footer-wave">
+  <span class="logo">Campus<span style="color:var(--accent)">Events</span></span>
+  <p>Made with &#x2764;&#xfe0f; by students, for students. &#169; 2026 All rights reserved</p>
+</div>
+ 
+<script src="home-animated.js"></script>
 </body>
 </html>
