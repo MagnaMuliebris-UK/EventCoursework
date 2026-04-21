@@ -297,10 +297,14 @@ function renderEvents() {
 
     html += `
       <div class="event-card" onclick="openEvent(${ev.id})">
-        <h3>${ev.icon} ${ev.title}</h3>
-        <p>${ev.category}</p>
-        <p>${ev.date} - ${ev.time}</p>
-        <p>${ev.location}</p>
+        <div class="event-image ${ev.category.toLowerCase()}">
+          <span class="category-btn">${ev.category}</span>
+          ${ev.icon}
+        </div>
+        <div class="event-details">
+          <h3>${ev.title}</h3>
+          <p class="event-meta">${ev.date}</p>
+        </div>
       </div>`;
   }
 
