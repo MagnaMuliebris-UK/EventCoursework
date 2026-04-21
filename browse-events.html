@@ -4,58 +4,58 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Student Events</title>
+<title>All Events</title>
 
 <style>
 
 body{
 font-family:Arial, sans-serif;
 background:#f3efe9;
-padding:40px;
+padding:60px;
 }
 
-/* BUTTON */
+/* HEADER */
 
-.browse-btn{
-background:#6c63ff;
-color:white;
-padding:12px 22px;
-border:none;
-border-radius:6px;
-font-size:16px;
-cursor:pointer;
-margin-top:30px;
+h1{
+font-size:40px;
+margin-bottom:10px;
 }
 
-.browse-btn:hover{
-background:#574fd6;
+.events-count{
+color:#666;
+margin-bottom:40px;
 }
 
-/* UPCOMING EVENTS GRID */
+/* GRID */
 
-.upcoming-events{
+.events-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:25px;
-margin-top:30px;
+gap:30px;
 }
 
-/* EVENT CARD */
+/* CARD */
 
 .event-card{
 background:white;
-border-radius:18px;
+border-radius:20px;
 overflow:hidden;
 box-shadow:0 3px 10px rgba(0,0,0,0.08);
+transition:0.2s;
 }
 
-.event-icon{
+.event-card:hover{
+transform:translateY(-6px);
+}
+
+/* ICON AREA */
+
+.event-image{
 height:120px;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:40px;
-background:#dfe7ef;
 position:relative;
 }
 
@@ -73,6 +73,15 @@ font-weight:bold;
 cursor:pointer;
 box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
+
+/* CATEGORY COLORS */
+
+.sports{background:#dfeae4;}
+.social{background:#efe0d7;}
+.study{background:#dbe3ee;}
+.culture{background:#e8e0f2;}
+
+/* DETAILS */
 
 .event-details{
 padding:20px;
@@ -93,16 +102,13 @@ font-size:14px;
 
 <body>
 
-<h1>Upcoming Events</h1>
+<h1>All Events</h1>
+<p class="events-count">Showing 8 events</p>
 
-<div class="upcoming-events"></div>
-
-<a href="browse-events.html">
-<button class="browse-btn">Browse Events</button>
-</a>
+<div class="events-grid"></div>
 
 <script src="events.js"></script>
-<script src="upcoming-events.js"></script>
+<script src="all-events.js"></script>
 
 </body>
 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Event Details</title>
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+background:#f3efe9;
+padding:60px;
+text-align:center;
+}
+
+.event-box{
+background:white;
+max-width:500px;
+margin:auto;
+padding:40px;
+border-radius:20px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+.event-icon{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.event-title{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.event-info{
+color:#666;
+margin:8px 0;
+}
+
+.buttons{
+margin-top:30px;
+}
+
+button{
+padding:12px 20px;
+margin:8px;
+border:none;
+border-radius:6px;
+font-size:15px;
+cursor:pointer;
+}
+
+.going{
+background:#4CAF50;
+color:white;
+}
+
+.favourite{
+background:#ff9800;
+color:white;
+}
+
+.back{
+background:#6c63ff;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="event-box">
+
+<div id="icon" class="event-icon"></div>
+
+<h1 id="title" class="event-title"></h1>
+
+<p id="date" class="event-info"></p>
+<p id="time" class="event-info"></p>
+<p id="location" class="event-info"></p>
+
+<div class="buttons">
+
+    <button class="going" onclick="rsvpEvent()">I'm Going!</button>
+    
+    <button class="favourite" onclick="saveEvent()">Save Favourite</button>
+    
+    <br>
+    
+    <button class="back" onclick="goBack()">Back to Events</button>
+    
+    </div>
+
+</div>
+
+
+<script src="events.js"></script>
+
+<script>
+
+// get the selected event id
+const eventId = localStorage.getItem("selectedEvent");
+
+// find the event from events.js
+const event = events.find(e => e.id == eventId);
+
+// display the event information
+document.getElementById("icon").innerText = event.icon;
+document.getElementById("title").innerText = event.title;
+document.getElementById("date").innerText = "📅 " + event.date;
+document.getElementById("time").innerText = "⏰ " + event.time;
+document.getElementById("location").innerText = "📍 " + event.location;
+
+
+// RSVP button
+function rsvpEvent(){
+alert("✅ You are going to this event!");
+}
+
+
+// Save favourite button
+function saveEvent(){
+alert("⭐ Event saved to favourites!");
+}
+
+
+// Back button
+function goBack(){
+window.location.href = "browse-events.html";
+}
+
+</script>
