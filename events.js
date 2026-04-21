@@ -82,6 +82,7 @@ const baseEvents = [
 ];
 // List of all student events
 var events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
+export{events};
 
 // Tracks which category filter is currently active. Defaults to All
 var activeCategory = 'All';
