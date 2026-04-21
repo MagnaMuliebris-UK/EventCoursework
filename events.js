@@ -149,7 +149,7 @@ function openEvent(id){
     window.location.href = "event-details.html";
 }
 
-const getRandomHex() {
+function getRandomHex() {
   // Generates a random number, converts to hex, and pads with zeros if needed
   return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
 };
