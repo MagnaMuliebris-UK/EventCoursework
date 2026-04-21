@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>Events App</title>
+
+<style>
+
+/* GENERAL */
+
+body{
+font-family:Arial, sans-serif;
+background:#f3efe9;
+padding:60px;
+}
+
+/* HEADER */
+
+h1{
+font-size:40px;
+margin-bottom:10px;rgb
+}
+
+.events-count{
+color:#666;
+margin-bottom:40px;
+}
+
+/* GRID */
+
+.events-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+/* CARD */
+
+.event-card{
+background:rgb(244, 241, 240);
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+transition:0.2s;
+cursor:pointer;
+}
+
+.event-card:hover{
+transform:translateY(-6px);
+}
+
+/* ICON AREA */
+
+.event-image{
+height:120px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+position:relative;
+}
+
+
+/* CATEGORY BUTTON */
+
+.category-btn{
+position:absolute;
+top:10px;
+left:10px;
+background:rgb(186, 229, 246);
+padding:4px 10px;
+border-radius:12px;
+font-size:12px;
+font-weight:bold;
+box-shadow:0 2px 5px rgba(246, 70, 70, 0.1);
+}
+
+/* CATEGORY COLORS */
+
+.sports{background:#b3fad3;}
+.social{background:#efe0d7;}
+.study{background:#dbe3ee;}
+.culture{background:#e8e0f2;}
+
+/* DETAILS */
+
+.event-details{
+padding:20px;
+}
+
+.event-meta{
+color:#666;
+font-size:14px;
+}
+
+
+/* ======================= */
+/* EVENT DETAILS SECTION */
+/* ======================= */
+
+.event-box{
+background:rgb(248, 241, 167);
+max-width:500px;
+margin:auto;
+padding:40px;
+border-radius:20px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+text-align:center;
+display:none;
+}
+
+.event-icon{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.event-title{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.event-info{
+color:#666;
+margin:8px 0;
+}
+
+.buttons{
+margin-top:30px;
+}
+
+button{
+padding:12px 20px;
+margin:8px;
+border:none;
+border-radius:6px;
+font-size:15px;
+cursor:pointer;
+}
+
+.going{
+background:#4CAF50;
+color:white;
+}
+
+.favourite{
+background:#ff9800;
+color:white;
+}
+
+.back{
+background:#6c63ff;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ======================= -->
+<!-- ALL EVENTS PAGE -->
+<!-- ======================= -->
+
+<div id="eventsPage">
+
+<h1>All Events</h1>
+<p class="events-count">Showing 8 events</p>
+
+<div class="events-grid" id="eventsGrid"></div>
+
+</div>
+
+
+
+<!-- ======================= -->
+<!-- EVENT DETAILS PAGE -->
+<!-- ======================= -->
+
+<div id="eventDetails" class="event-box">
+
+<div id="icon" class="event-icon"></div>
+
+<h1 id="title" class="event-title"></h1>
+
+<p id="date" class="event-info"></p>
+<p id="time" class="event-info"></p>
+<p id="location" class="event-info"></p>
+
+<div class="buttons">
+
+<button class="going" onclick="rsvpEvent()">I'm Going!</button>
+
+<button class="favourite" onclick="saveEvent()">Save Favourite</button>
+
+<br>
+
+<button class="back" onclick="goBack()">Back to Events</button>
+
+</div>
+
+</div>
+
+
+<script src="events.js"></script>
+
+<script>
+
+/* DISPLAY EVENTS */
+
+const grid = document.getElementById("eventsGrid");
+
+events.forEach(event => {
+
+const card = document.createElement("div");
+card.className = "event-card";
+
+card.innerHTML = `
+<div class="event-image ${event.category}">
+<span class="category-btn">${event.category}</span>
+${event.icon}
+</div>
+
+<div class="event-details">
+<h3>${event.title}</h3>
+<p class="event-meta">${event.date}</p>
+</div>
+`;
+
+card.onclick = () => openEvent(event);
+
+grid.appendChild(card);
+
+});
+
+
+/* OPEN EVENT DETAILS */
+
+function openEvent(event){
+
+document.getElementById("eventsPage").style.display = "none";
+document.getElementById("eventDetails").style.display = "block";
+
+document.getElementById("icon").innerText = event.icon;
+document.getElementById("title").innerText = event.title;
+document.getElementById("date").innerText = "📅 " + event.date;
+document.getElementById("time").innerText = "⏰ " + event.time;
+document.getElementById("location").innerText = "📍 " + event.location;
+
+}
+
+
+/* BUTTONS */
+
+function rsvpEvent(){
+alert("✅ You are going to this event!");
+}
+
+function saveEvent(){
+alert("⭐ Event saved to favourites!");
+}
+
+function goBack(){
+
+document.getElementById("eventDetails").style.display = "none";
+document.getElementById("eventsPage").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
