@@ -224,9 +224,6 @@ function validateFormData(){
         //eventIcon
         let eventIcon = document.getElementById("eventIcon").value;
         let eIconValid = document.getElementById("eventIcon").value !== "Choose Icon";
-
-
-        alert(eventTitle);
         
         if(eTitleValid && eDateValid &&
            eTimeValid && eTypeValid &&
