@@ -95,7 +95,6 @@ if((JSON.parse(localStorage.getItem("events")))&&(JSON.parse(localStorage.getIte
 { 
     events = JSON.parse(localStorage.getItem("events"));
 }
-alert(JSON.stringify(events, null, 2));
 // Tracks which category filter is currently active. Defaults to All
 var activeCategory = 'All';
 // Tracks the current search query entered by the user
@@ -145,7 +144,6 @@ if (btns.length > 0) {
 function save() {
     localStorage.setItem("events", JSON.stringify(events));
     events = JSON.parse(localStorage.getItem("events"));
-    alert(JSON.stringify(events, null, 2));
     renderEvents();
 }
 
@@ -182,7 +180,6 @@ function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLo
                  icon: eventIcon,
                  bg: getRandomHex()}
                );
-    alert(JSON.stringify(events, null, 2));
     save();
 }
 
@@ -267,22 +264,22 @@ function validateFormData(){
         else{
         //handled in html
             if(!eTitleValid) {
-             alert("Title not valid");   
+             alert("Title not valid, do not enter special characters or numbers");   
             }
             if(!eDateValid) {
-             alert("date not valid");   
+             alert("Date not valid");   
             }
             if(!eTimeValid) {
-             alert("time not valid");   
+             alert("Time not valid");   
             }
             if(!eTypeValid) {
-             alert("type not valid");   
+             alert("Type is not valid");   
             }
             if(!eIconValid) {
-             alert("icon not valid");   
+             alert("Icon not valid");   
             }
             if(!eLocationValid) {
-             alert("location not valid");   
+             alert("Location not valid, do not enter special characters");   
             }
         }
     });
