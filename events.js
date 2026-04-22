@@ -90,8 +90,15 @@ const baseEvents = [
     }
 ];
 // List of all student events
-var events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
-
+var events;
+if(JSON.parse(localStorage.getItem("events"))=="")
+{ 
+    events = [...baseEvents];
+}
+else
+{
+    events = JSON.parse(localStorage.getItem("events"));
+}
 // Tracks which category filter is currently active. Defaults to All
 var activeCategory = 'All';
 // Tracks the current search query entered by the user
@@ -293,7 +300,25 @@ function renderEvents() {
     return;
   }
 
-  var html = "";
+    const card = document.createElement("div");
+    card.className = "event-card";
+
+    card.innerHTML = `
+    <div class="event-image ${event.category}">
+    <span class="category-btn">${event.category}</span>
+    ${event.icon}
+    </div>
+
+    <div class="event-details">
+    <h3>${event.title}</h3>
+    <p class="event-meta">${event.date}</p>
+    </div>
+    `;
+
+    card.onclick = () => openEvent(event);
+
+    container.appendChild(card);
+    var html = "";
 
   // Loops through filtered events and builds a card for each one
   for (var i = 0; i < filtered.length; i++) {
