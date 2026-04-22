@@ -1,11 +1,7 @@
 import{baseEvents} from "./events.js";
 
-var events;
-if(!(JSON.parse(localStorage.getItem("events")))||(JSON.parse(localStorage.getItem("events"))=="[]"))
-{
-  events = [...baseEvents];
-}
-else
+var events = [...baseEvents];
+if((JSON.parse(localStorage.getItem("events")))||(JSON.parse(localStorage.getItem("events"))!="[]"))
 {
   events = JSON.parse(localStorage.getItem("events"));
 }
