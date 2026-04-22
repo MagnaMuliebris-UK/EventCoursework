@@ -88,6 +88,34 @@
 <div class="events-grid" id="eventsGrid"></div>
 
 </div>
+<!-- ======================= -->
+<!-- EVENT DETAILS PAGE -->
+<!-- ======================= -->
+
+<div id="eventDetails" class="event-box">
+
+<div id="icon" class="event-icon"></div>
+
+<h1 id="title" class="event-title"></h1>
+
+<p id="date" class="event-info"></p>
+<p id="time" class="event-info"></p>
+<p id="location" class="event-info"></p>
+
+<div class="buttons">
+
+<button class="going" onclick="rsvpEvent()">I'm Going!</button>
+
+<button class="favourite" onclick="saveEvent()">Save Favourite</button>
+
+<br>
+
+<button class="back" onclick="goBack()">Back to Events</button>
+
+</div>
+
+</div>
+
 <div class="content">
 <h1>Add Event</h1>
 
@@ -135,34 +163,6 @@
           <button type="submit" id="submitButton">Add Event</button>
         </form>
       </div>
-
-<!-- ======================= -->
-<!-- EVENT DETAILS PAGE -->
-<!-- ======================= -->
-
-<div id="eventDetails" class="event-box">
-
-<div id="icon" class="event-icon"></div>
-
-<h1 id="title" class="event-title"></h1>
-
-<p id="date" class="event-info"></p>
-<p id="time" class="event-info"></p>
-<p id="location" class="event-info"></p>
-
-<div class="buttons">
-
-<button class="going" onclick="rsvpEvent()">I'm Going!</button>
-
-<button class="favourite" onclick="saveEvent()">Save Favourite</button>
-
-<br>
-
-<button class="back" onclick="goBack()">Back to Events</button>
-
-</div>
-
-</div>
-
+  
 </body>
 </html>
