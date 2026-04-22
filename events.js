@@ -91,7 +91,7 @@ const baseEvents = [
 ];
 // List of all student events
 var events;
-if(JSON.parse(localStorage.getItem("events"))=="")
+if(!JSON.parse(localStorage.getItem("events"))=="")
 { 
     events = [...baseEvents];
 }
