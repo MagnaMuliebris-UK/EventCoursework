@@ -5,6 +5,7 @@ padding:60px;
 }
 .aEButton {
   background: #ebe6df !important; /* Slightly darker than the page background (#f3efe9) */
+  padding: 12px 16px;
   border: 2px solid #dcd7cf !important; /* Defined border to make it pop */
   transition: border-color 0.2s ease, background 0.2s ease;
 }
