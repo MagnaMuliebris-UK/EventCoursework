@@ -107,7 +107,6 @@ if (searchBox) {
       // Updates searchQuery with the current input, trimming whitespace
     searchQuery = this.value.trim();
     renderEvents();
-    displayEvents();
   });
 }
 //SEARCH INPUT END
@@ -143,6 +142,7 @@ function save() {
     localStorage.setItem("events", JSON.stringify(events));
     events = JSON.parse(localStorage.getItem("events"));
     renderEvents();
+    displayEvents(events);
 }
 save();
 
