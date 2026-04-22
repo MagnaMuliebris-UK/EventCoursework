@@ -1,4 +1,5 @@
-import {events} from "./events.js";
+import {baseEvents} from "./events.js";
+let events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
 //comment test
 const container = document.querySelector(".events-grid");
 
