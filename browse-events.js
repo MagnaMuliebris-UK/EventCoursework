@@ -1,6 +1,14 @@
 import{baseEvents} from "./events.js";
 
-let events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
+var events;
+if(JSON.parse(localStorage.getItem("events"))=="")
+{
+  events = [...baseEvents];
+}
+else
+{
+  events = JSON.parse(localStorage.getItem("events"));
+}
 
 /* DISPLAY EVENTS */
 const grid = document.getElementById("events-grid");
