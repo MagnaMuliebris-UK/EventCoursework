@@ -1,8 +1,11 @@
 import{baseEvents} from "./events.js";
+
 let events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
+
 /* DISPLAY EVENTS */
 const grid = document.getElementById("events-grid");
-
+function displayEvents(){
+  if(!grid) return;
 events.forEach(event => {
 
 const card = document.createElement("div");
@@ -25,6 +28,8 @@ card.onclick = () => openEvent(event);
 grid.appendChild(card);
 
 });
+}
+displayEvents();
 
 
 /* OPEN EVENT DETAILS */
