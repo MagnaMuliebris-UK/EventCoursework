@@ -243,6 +243,24 @@ function validateFormData(){
         }
         else{
         //handled in html
+            if(!eTitleValid) {
+             alert("Title not valid");   
+            }
+            if(!eDateValid) {
+             alert("Title not valid");   
+            }
+            if(!eTimeValid) {
+             alert("Title not valid");   
+            }
+            if(!eTypeValid) {
+             alert("Title not valid");   
+            }
+            if(!eIconValid) {
+             alert("Title not valid");   
+            }
+            if(!eLocationValid) {
+             alert("Title not valid");   
+            }
         }
     });
 }
