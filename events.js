@@ -311,7 +311,7 @@ function getFilteredEvents() {
 //RENDER EVENT START
 // Builds and displays the event cards based on current filters and search
 function renderEvents() {
-  var container = document.getElementById("events-grid");
+  var container = document.getElementById("eventsGrid");
 
   // Exits early if the container doesn't exist, prevents crashes on other pages
   if (!container) return; //prevents crashes
