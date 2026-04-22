@@ -1,3 +1,13 @@
+/* ROOT VARIABLES - Ensure these are defined in your generalFormatting.css */
+:root {
+  --accent: #e85d26;
+  --accent-light: rgba(232, 93, 38, 0.2);
+  --border: #dcd7cf;
+  --surface: #ffffff;
+  --ink: #1a1a1a;
+  --radius: 12px;
+}
+
 /* Required field asterisk */
 .required::after {
   content: ' *';
