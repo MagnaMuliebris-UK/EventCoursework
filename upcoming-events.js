@@ -1,4 +1,5 @@
-import {events} from "./events.js";
+import {baseEvents} from "./events.js";
+let events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
 
 const container = document.querySelector(".upcoming-events");
 
