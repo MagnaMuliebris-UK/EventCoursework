@@ -181,7 +181,9 @@ function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLo
                  location: eventLocation,
                  icon: eventIcon,
                  bg: getRandomHex()}
-               ); save();
+               );
+    alert(JSON.stringify(events, null, 2));
+    save();
 }
 
 //Validates all data.
@@ -198,9 +200,12 @@ function validateFormData(){
 
         //eventDate
         let eventDate = document.getElementById("eventDate").value;
+        let eDateRegex= /^(?:\d{4}-(?:(?:(?:(?:0[13578]|1[02])-(?:0[1-9]|[1-2][0-9]|3[01]))|(?:(?:0[469]|11)-(?:0[1-9]|[1-2][0-9]|30))|(?:02-(?:0[1-9]|1[0-9]|2[0-8]))))|(?:(?:\d{2}(?:0[48]|[2468][048]|[13579][26]))|(?:(?:[02468][048])|[13579][26])00)-02-29)$/; // YYYY-MM-DD format, also accounts for leap years, month variable days, etc. Tested via regex101
+        if(!RegExp(eDateRegex).test(eventDate))
+        {
         let [days, months, years] = eventDate.split('/');
         eventDate = `${years}-${months}-${days}`;
-        let eDateRegex= /^(?:\d{4}-(?:(?:(?:(?:0[13578]|1[02])-(?:0[1-9]|[1-2][0-9]|3[01]))|(?:(?:0[469]|11)-(?:0[1-9]|[1-2][0-9]|30))|(?:02-(?:0[1-9]|1[0-9]|2[0-8]))))|(?:(?:\d{2}(?:0[48]|[2468][048]|[13579][26]))|(?:(?:[02468][048])|[13579][26])00)-02-29)$/; // YYYY-MM-DD format, also accounts for leap years, month variable days, etc. Tested via regex101
+        }
         let eDateValid = RegExp(eDateRegex).test(eventDate);
 
         //eventTime (12hr and 24hr appropriate)
@@ -222,6 +227,9 @@ function validateFormData(){
         let eventIcon = document.getElementById("eventIcon").value;
         let eIconValid = document.getElementById("eventIcon").value !== "Choose Icon";
 
+
+        alert(eventTitle);
+        
         if(eTitleValid && eDateValid &&
            eTimeValid && eTypeValid &&
            eIconValid && eLocationValid){
