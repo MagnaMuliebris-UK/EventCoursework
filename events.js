@@ -90,13 +90,9 @@ const baseEvents = [
     }
 ];
 // List of all student events
-var events;
-if(!(JSON.parse(localStorage.getItem("events")))||(JSON.parse(localStorage.getItem("events"))=="[]"))
+var events = [...baseEvents];
+if((JSON.parse(localStorage.getItem("events")))||(JSON.parse(localStorage.getItem("events"))!="[]"))
 { 
-    events = [...baseEvents];
-}
-else
-{
     events = JSON.parse(localStorage.getItem("events"));
 }
 // Tracks which category filter is currently active. Defaults to All
