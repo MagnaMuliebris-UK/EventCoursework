@@ -1,3 +1,4 @@
+import {displayEvents} from "./browse-events.js"
 //Global variable & global variable logic begin
 const baseEvents = [
     {
@@ -106,6 +107,7 @@ if (searchBox) {
       // Updates searchQuery with the current input, trimming whitespace
     searchQuery = this.value.trim();
     renderEvents();
+    displayEvents();
   });
 }
 //SEARCH INPUT END
