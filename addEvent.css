@@ -43,11 +43,6 @@ label {
   color: var(--ink);
 }
 
-.required::after {
-  content: " *";
-  color: var(--accent);
-}
-
 input[type="text"],
 input[type="date"],
 input[type="time"],
