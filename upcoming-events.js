@@ -1,3 +1,5 @@
+import {events} from "./events.js";
+
 const container = document.querySelector(".upcoming-events");
 
 events.slice(0,3).forEach(event => {
