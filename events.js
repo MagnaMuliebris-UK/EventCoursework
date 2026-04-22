@@ -171,6 +171,7 @@ function CreateNewEvent(eventTitle, eventDate, eventTime, eventCategory, eventLo
 //Validates all data.
 function validateFormData(){
   let button = document.getElementById("submitButton");
+    if (!button) return;
     button.addEventListener("click", function(event){
         event.preventDefault();
 
