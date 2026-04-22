@@ -95,6 +95,7 @@ if((JSON.parse(localStorage.getItem("events")))&&(JSON.parse(localStorage.getIte
 { 
     events = JSON.parse(localStorage.getItem("events"));
 }
+alert(JSON.stringify(events, null, 2));
 // Tracks which category filter is currently active. Defaults to All
 var activeCategory = 'All';
 // Tracks the current search query entered by the user
