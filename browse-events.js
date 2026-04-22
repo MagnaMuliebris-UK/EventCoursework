@@ -5,6 +5,7 @@ if((JSON.parse(localStorage.getItem("events")))&&(JSON.parse(localStorage.getIte
 {
   events = JSON.parse(localStorage.getItem("events"));
 }
+alert(events);
 
 /* DISPLAY EVENTS */
 const grid = document.getElementById("events-grid");
