@@ -144,7 +144,7 @@ if (btns.length > 0) {
 function save() {
     localStorage.setItem("events", JSON.stringify(events));
     events = JSON.parse(localStorage.getItem("events"));
-    alert(events);
+    alert(JSON.stringify(events, null, 2));
     renderEvents();
 }
 
@@ -296,7 +296,8 @@ function renderEvents() {
     container.innerHTML = "<p>No events found.</p>";
     return;
   }
-    
+
+    let html="";
   // Loops through filtered events and builds a card for each one
   for (var i = 0; i < filtered.length; i++) {
     var ev = filtered[i];
