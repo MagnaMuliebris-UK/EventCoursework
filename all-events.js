@@ -1,5 +1,5 @@
 import {events} from "./events.js";
-
+//comment test
 const container = document.querySelector(".events-grid");
 
 events.forEach(event => {
