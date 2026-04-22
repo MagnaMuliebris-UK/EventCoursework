@@ -297,27 +297,7 @@ function renderEvents() {
     container.innerHTML = "<p>No events found.</p>";
     return;
   }
-
-    const card = document.createElement("div");
-    card.className = "event-card";
-
-    card.innerHTML = `
-    <div class="event-image ${event.category}">
-    <span class="category-btn">${event.category}</span>
-    ${event.icon}
-    </div>
-
-    <div class="event-details">
-    <h3>${event.title}</h3>
-    <p class="event-meta">${event.date}</p>
-    </div>
-    `;
-
-    card.onclick = () => openEvent(event);
-
-    container.appendChild(card);
-    var html = "";
-
+    
   // Loops through filtered events and builds a card for each one
   for (var i = 0; i < filtered.length; i++) {
     var ev = filtered[i];
@@ -339,6 +319,39 @@ function renderEvents() {
   container.innerHTML = html;
 }
 //RENDER EVENT END
+
+/* OPEN EVENT DETAILS */
+
+function openEvent(event){
+
+document.getElementById("eventsPage").style.display = "none";
+document.getElementById("eventDetails").style.display = "block";
+
+document.getElementById("icon").innerText = event.icon;
+document.getElementById("title").innerText = event.title;
+document.getElementById("date").innerText = "📅 " + event.date;
+document.getElementById("time").innerText = "⏰ " + event.time;
+document.getElementById("location").innerText = "📍 " + event.location;
+
+}
+
+
+/* BUTTONS */
+
+function rsvpEvent(){
+alert("✅ You are going to this event!");
+}
+
+function saveEvent(){
+alert("⭐ Event saved to favourites!");
+}
+
+function goBack(){
+
+document.getElementById("eventDetails").style.display = "none";
+document.getElementById("eventsPage").style.display = "block";
+
+}
 
 // Waits for the DOM to be ready before rendering, or renders immediately if already loaded
 if (document.readyState === "loading") {
