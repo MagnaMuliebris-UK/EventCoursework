@@ -3,6 +3,48 @@ font-family:Arial, sans-serif;
 background:#f3efe9;
 padding:60px;
 }
+.aEButton {
+  background: #ebe6df !important; /* Slightly darker than the page background (#f3efe9) */
+  border: 2px solid #dcd7cf !important; /* Defined border to make it pop */
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.aEButton:focus {
+  background: var(--surface) !important; /* Lightens back up when typing */
+  border-color: var(--accent) !important;
+}
+
+/* UPDATED: Submit button hover logic */
+#submitButton {
+  background: var(--accent);
+  color: #d14d1b;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 4px 20px rgba(232, 93, 38, 0.3);
+  margin-top: 10px;
+}
+
+#submitButton:hover {
+  /* Instead of turning white, we use a slightly lighter shade of the accent color */
+  background: #f16a3a; /* A lighter, softer orange than the default */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(232, 93, 38, 0.4);
+}
+#submitButton:hover {
+  background: #d14d1b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(232, 93, 38, 0.4);
+}
+
+#submitButton:active {
+  transform: translateY(0);
+}
 
 .content {
   position: relative;
@@ -83,31 +125,6 @@ select {
 }
 
 /* SUBMIT BUTTON */
-
-#submitButton {
-  background: var(--accent);
-  color: #fff;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 16px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-  box-shadow: 0 4px 20px rgba(232, 93, 38, 0.3);
-  margin-top: 10px;
-}
-
-#submitButton:hover {
-  background: #d14d1b;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(232, 93, 38, 0.4);
-}
-
-#submitButton:active {
-  transform: translateY(0);
-}
 
 /* RESPONSIVE ADJUSTMENTS */
 
