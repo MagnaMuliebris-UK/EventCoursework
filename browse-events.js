@@ -1,7 +1,6 @@
 import{events} from "./events.js";
 
 /* DISPLAY EVENTS */
-
 const grid = document.getElementById("events-grid");
 
 events.forEach(event => {
