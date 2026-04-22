@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="generalFormatting.css">
+    <link rel="stylesheet" href="addEvent.css">
+    <script src= "events.js" defer></script>
+  </head>
+  <body>
+    <div class="content">
+<h1>Add Event</h1>
 
+      <form id="addEventForm">
+          <label class = "required" for="eventTitle">Event Title:</label><br>
+                <input type="text" id="eventTitle" name="eventTitle" required 
+                placeholder="Enter Event Title"
+                oninvalid="this.setCustomValidity('Enter Event Title Here: must only contain letters')"
+                oninput="setCustomValidity('')"><br>
+          <label class = "required" for="eventDate">Event Date:</label><br>
+                <input type="date" id="eventDate" name="eventDate" required 
+                placeholder="Enter Event Date"
+                oninvalid="this.setCustomValidity('Enter Event Date Here: must be in YYYY-MM-DD format, including dashes')"
+                oninput="setCustomValidity('')"><br>
+        <label class = "required" for="eventTime">Event Time:</label><br>
+                <input type="time" id="eventTime" name="eventTime" required 
+                placeholder="Enter Event Time"
+                oninvalid="this.setCustomValidity('Enter Event Time Here: must be in HH:MM or HH:MM AM or HH:MM PM format including the colon and space')"
+                oninput="setCustomValidity('')"><br>
+
+        <select id="eventType" size="1">
+            <option>Choose Event Category</option>
+            <option>Sports</option>
+            <option>Study</option>
+            <option>Social</option>
+            <option>Culture</option>
+          </select>
+        <label class = "required" for="eventLocation">Event Location:</label><br>
+                <input type="text" id="eventLocation" name="eventLocation" required 
+                placeholder="Enter Event Location"
+                oninvalid="this.setCustomValidity('Enter Event Location Here: no special characters allowed')" 
+                oninput="setCustomValidity('')"><br><!--Should be noted, the no special characters part IS a lie, but is easier to explain than "yeah, alphanum, and "," "'" and "-". Mostly added leniency-->
+        <select id="eventIcon" size="1">
+            <option>Choose Icon</option>
+            <option>⚽</option>
+            <option>🎉</option>
+            <option>📚</option>
+            <option>🎭</option>
+            <option>🏀</option>
+            <option>💼</option>
+            <option>🍜</option>
+            <option>🫱🏽‍🫲🏾🌍</option>
+          </select>
+          <br><br>
+          <button type="submit" id="submitButton">Add Event</button>
+        </form>
+      </div>
+
+  </body>
+</html>
