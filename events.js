@@ -149,10 +149,20 @@ function save() {
     renderEvents();
 }
 
-// Function to open the event details page   
-function openEvent(id){    
+/* OPEN EVENT DETAILS */
+
+function openEvent(id, event){
     localStorage.setItem("selectedEvent", id);
     window.location.href = "event-details.html";
+document.getElementById("eventsPage").style.display = "none";
+document.getElementById("eventDetails").style.display = "block";
+
+document.getElementById("icon").innerText = event.icon;
+document.getElementById("title").innerText = event.title;
+document.getElementById("date").innerText = "📅 " + event.date;
+document.getElementById("time").innerText = "⏰ " + event.time;
+document.getElementById("location").innerText = "📍 " + event.location;
+
 }
 
 function getRandomHex() {
@@ -338,22 +348,6 @@ function renderEvents() {
   container.innerHTML = html;
 }
 //RENDER EVENT END
-
-/* OPEN EVENT DETAILS */
-
-function openEvent(event){
-
-document.getElementById("eventsPage").style.display = "none";
-document.getElementById("eventDetails").style.display = "block";
-
-document.getElementById("icon").innerText = event.icon;
-document.getElementById("title").innerText = event.title;
-document.getElementById("date").innerText = "📅 " + event.date;
-document.getElementById("time").innerText = "⏰ " + event.time;
-document.getElementById("location").innerText = "📍 " + event.location;
-
-}
-
 
 /* BUTTONS */
 
