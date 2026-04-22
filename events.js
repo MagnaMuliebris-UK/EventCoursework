@@ -200,7 +200,7 @@ function validateFormData(){
         let eTimeValid = RegExp(eTimeRegex).test(eventTime)||RegExp(eTimeAMPMRegex).test(eventTime);//Checks if satiates either.
 
         //eventType
-        let eventType = document.getElementById("eventType").selectedOptions;
+        let eventType = document.getElementById("eventType").value;
         let eTypeValid = document.getElementById("eventType").value !== "Choose Event Category";
 
         //eventLocation
@@ -209,7 +209,7 @@ function validateFormData(){
         let eLocationValid = RegExp(eLocationRegex).test(eventLocation);
 
         //eventIcon
-        let eventIcon = document.getElementById("eventIcon").selectedOptions;
+        let eventIcon = document.getElementById("eventIcon").value;
         let eIconValid = document.getElementById("eventIcon").value !== "Choose Icon";
 
         if(eTitleValid && eDateValid &&
@@ -248,19 +248,19 @@ function validateFormData(){
              alert("Title not valid");   
             }
             if(!eDateValid) {
-             alert("Title not valid");   
+             alert("date not valid");   
             }
             if(!eTimeValid) {
-             alert("Title not valid");   
+             alert("time not valid");   
             }
             if(!eTypeValid) {
-             alert("Title not valid");   
+             alert("type not valid");   
             }
             if(!eIconValid) {
-             alert("Title not valid");   
+             alert("icon not valid");   
             }
             if(!eLocationValid) {
-             alert("Title not valid");   
+             alert("location not valid");   
             }
         }
     });
