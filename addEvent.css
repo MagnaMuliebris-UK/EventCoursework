@@ -1,3 +1,9 @@
+body{
+font-family:Arial, sans-serif;
+background:#f3efe9;
+padding:60px;
+}
+
 .content {
   position: relative;
   z-index: 1;
