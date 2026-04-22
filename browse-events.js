@@ -4,9 +4,9 @@ let events = JSON.parse(localStorage.getItem("events")) || [...baseEvents];
 
 /* DISPLAY EVENTS */
 const grid = document.getElementById("events-grid");
-function displayEvents(){
+function displayEvents(eVents){
   if(!grid) return;
-events.forEach(event => {
+eVents.forEach(event => {
 
 const card = document.createElement("div");
 card.className = "event-card";
@@ -29,7 +29,7 @@ grid.appendChild(card);
 
 });
 }
-displayEvents();
+displayEvents(events);
 
 
 /* OPEN EVENT DETAILS */
