@@ -142,7 +142,6 @@ function save() {
     localStorage.setItem("events", JSON.stringify(events));
     events = JSON.parse(localStorage.getItem("events"));
     renderEvents();
-    displayEvents(events);
 }
 
 // Function to open the event details page   
