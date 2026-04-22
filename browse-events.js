@@ -1,5 +1,5 @@
 /* DISPLAY EVENTS */
-
+import{events} from "./events.js";
 const grid = document.getElementById("eventsGrid");
 
 events.forEach(event => {
