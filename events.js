@@ -1,3 +1,5 @@
+import {displayEvents} from "./browse-events.js";
+
 //Global variable & global variable logic begin
 const baseEvents = [
     {
