@@ -146,6 +146,7 @@ if (btns.length > 0) {
 function save() {
     localStorage.setItem("events", JSON.stringify(events));
     events = JSON.parse(localStorage.getItem("events"));
+    alert(events);
     renderEvents();
 }
 
