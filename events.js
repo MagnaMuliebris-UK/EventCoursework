@@ -1,5 +1,3 @@
-import {displayEvents} from "./browse-events.js";
-
 //Global variable & global variable logic begin
 const baseEvents = [
     {
@@ -142,7 +140,7 @@ if (btns.length > 0) {
 function save() {
     localStorage.setItem("events", JSON.stringify(events));
     events = JSON.parse(localStorage.getItem("events"));
-    displayEvents();
+    renderEvents();
 }
 save();
 
@@ -280,7 +278,7 @@ function getFilteredEvents() {
 //RENDER EVENT START
 // Builds and displays the event cards based on current filters and search
 function renderEvents() {
-  var container = document.getElementById("eventsGrid");
+  var container = document.getElementById("events-grid");
 
   // Exits early if the container doesn't exist, prevents crashes on other pages
   if (!container) return; //prevents crashes
