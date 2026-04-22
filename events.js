@@ -144,7 +144,6 @@ function save() {
     renderEvents();
     displayEvents(events);
 }
-save();
 
 // Function to open the event details page   
 function openEvent(id){    
